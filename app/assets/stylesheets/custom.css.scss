@@ -1,0 +1,71 @@
+$my_navbar_color: #fff;
+$my_brand_color: #66f;
+@import "bootstrap";
+@import url("http://fonts.googleapis.com/css?family=Rock+Salt");
+@import url("http://fonts.googleapis.com/css?family=Oleo+Script");
+
+body {
+	font-family: 'Rock Salt', cursive;
+	text-align: center;
+}
+
+div {
+	//border: 1px solid black;
+}
+
+
+.navbar-inverse {
+	background-color: #555;
+	margin-bottom: 0;
+	border-radius: 0;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a {
+	color: $my_navbar_color;
+}
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-nav > li > a:hover {
+	color: darken($my_navbar_color, 20);
+}
+
+.navbar-inverse .navbar-brand {
+	font-size: 30px;
+	font-family: 'Oleo Script', cursive;
+	color: $my_brand_color;
+}
+
+.featured {
+	font-size: 300px;
+	margin: auto auto;
+}
+
+.clear {
+	clear: both;
+}
+
+.upcoming-label {
+	margin-top: 10px;
+	padding: 10px;
+}
+
+.featured-label {
+	font-size: 20px;
+	margin: 20px;
+}
+
+.vs {
+	font-size: 100px;
+	vertical-align: center;
+	line-height: 250px;
+	top: 25px;
+}
+
+.upcoming-vs {
+	font-size: 50px;
+	vertical-align: center;
+	line-height: 90px;
+}
+
+.upcoming-contestant {
+	font-size: 100px;
+	margin: auto auto;
+}
