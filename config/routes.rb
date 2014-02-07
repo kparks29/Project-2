@@ -1,10 +1,13 @@
 HashOutBout::Application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  resources :users, only:[:index,:new,:show,:create,:destroy,:edit]
+  resources :users
   # You can have the root of your site routed with "root"
   root 'user#index'
-
+  
+  match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+  match 'auth/failure', to: redirect('/'), via: [:get, :post]
+  match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

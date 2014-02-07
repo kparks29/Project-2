@@ -5,7 +5,8 @@ gem 'rails', '4.0.2'
 gem 'mongoid', github: 'mongoid/mongoid'
 gem 'bootstrap-sass', github: 'twbs/bootstrap-sass'
 gem 'font-awesome-sass'
-gem "userbin"
+gem 'omniauth'
+gem "omniauth-facebook"
 
 
 # Use SCSS for stylesheets
