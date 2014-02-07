@@ -1,5 +1,6 @@
 $my_navbar_color: #fff;
 $my_brand_color: #66f;
+
 @import "bootstrap";
 @import url("http://fonts.googleapis.com/css?family=Rock+Salt");
 @import url("http://fonts.googleapis.com/css?family=Oleo+Script");
@@ -68,4 +69,14 @@ div {
 .upcoming-contestant {
 	font-size: 100px;
 	margin: auto auto;
+}
+
+
+.first-stripe {
+	background-color: darken($my_navbar_color, 10);
+	padding-bottom: 20px;
+}
+
+.carousel-indicators {
+	color: #000;
 }
