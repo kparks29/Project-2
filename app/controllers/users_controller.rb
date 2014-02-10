@@ -1,6 +1,9 @@
 require 'rails/mongoid'
 
-class UserController < ApplicationController
+class UsersController < ApplicationController
+
+	def modal
+	end
 
 	def index
 		@users = User.all
@@ -18,6 +21,14 @@ class UserController < ApplicationController
 		@user = User.find(params[:id])
 	end
 
+	def update
+		if current_user.update(user_params)
+			render action: 'edit'
+		else
+			render action: 'edit'
+		end
+	end
+
 	def create
 		@user = User.new(user_params)
 
@@ -30,10 +41,11 @@ class UserController < ApplicationController
 	end
 
 	def destroy
-		@user = User.find(params[:id])
+		@user = current_user
 
 		if @user.destroy
 			flash[:notice] = "Account Deleted"
+			session[:user_id] = nil
 			redirect_to users_path
 		else
 			render action: 'index'
@@ -43,7 +55,7 @@ class UserController < ApplicationController
 	private
 
 	def user_params
-		params.require(:user).permit(:first_name,:last_name,:username,:salt,:hashed_password)
+		params.require(:user).permit(:first_name,:last_name,:name,:salt,:hashed_password,:email,:city,:state,:zip_code,:image)
 	end
 
 

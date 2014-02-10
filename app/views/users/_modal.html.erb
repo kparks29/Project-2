@@ -1,0 +1,27 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Get Started</h4>
+      </div>
+
+      <div class="modal-body">
+          <% if params[:login] %>
+            <%= link_to "Sign Up", root_path(login_action: false) %>
+          <% elsif params[:signup] %>
+            <%= link_to "Sign Up", root_path(login_action: false) %>
+          <% else %>
+            <%= link_to "Login", root_path(login: true, login_action: true) %> or 
+            <%= link_to "Sign Up", root_path(signup: true, login_action: true) %>
+            <br /><br />
+            <%= link_to "Sign in with Facebook", "/auth/facebook" %>
+          <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

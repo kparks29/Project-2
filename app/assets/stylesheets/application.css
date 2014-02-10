@@ -12,3 +12,18 @@
  *= require_tree .
  */
 
+.footer {
+	height: 50px;
+	color: #fff;
+	width: 100%;
+	box-shadow: 1px 8px 30px #000;
+	text-align: center;
+}
+
+.footer h2 {
+	padding-top: 7px;
+}
+
+.clear {
+	clear: both;
+}

@@ -1,0 +1,11 @@
+<%= form_for current_user do |f| %>
+  First Name: <%= f.text_field :first_name %><br />
+  Last Name: <%= f.text_field :last_name %><br />
+  Email: <%= f.text_field :email %><br />
+  City: <%= f.text_field :city %><br />
+  State: <%= f.text_field :state %><br />
+  Zip Code: <%= f.number_field :zip_code %><br />
+  Date of Birth: <%= f.date_field :date_of_birth %><br />
+  <%= f.submit %>  <button class="form_button"><%= link_to "Delete Account", user_path(current_user), method: "delete" %></button>
+
+<% end %>
