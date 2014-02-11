@@ -7,6 +7,7 @@ gem 'bootstrap-sass', github: 'twbs/bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'omniauth'
 gem "omniauth-facebook"
+gem 'bcrypt-ruby', github: 'codahale/bcrypt-ruby'
 
 
 # Use SCSS for stylesheets

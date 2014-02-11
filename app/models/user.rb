@@ -1,6 +1,9 @@
 class User
   include Mongoid::Document
   include Mongoid::Attributes::Dynamic
+
+  attr_accessor :password
+
   field :first_name, type: String
   field :last_name, type: String
   field :name, type: String
@@ -16,6 +19,8 @@ class User
   field :oauth_expires_at, type: DateTime
   field :image, type: String
 
+  validates :email, uniqueness: {message: "already subscribed"}
+
    def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth.provider
@@ -29,6 +34,21 @@ class User
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!
     end
+  end
+
+  before_save :hash_stuff
+
+  def authenticated? (pwd)
+    self.hashed_password == BCrypt::Engine.hash_secret(pwd, self.salt)
+    @password = nil
+  end
+
+  private
+
+  def hash_stuff
+    self.salt = BCrypt::Engine.generate_salt
+    self.hashed_password = BCrypt::Engine.hash_secret(self.password, self.salt)
+    @password = nil
   end
 
 end

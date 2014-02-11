@@ -1,16 +1,16 @@
 require 'rails/mongoid'
+require 'bcrypt'
 
 class UsersController < ApplicationController
 
-	def modal
-	end
 
 	def index
-		@users = User.all
+		@user = User.new
 	end
 
 	def new
 		@user = User.new
+		redirect_to users_path
 	end
 
 	def show
@@ -31,13 +31,13 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.new(user_params)
-
-		if @user.save
-			flash[:notice] = "Created Account"
-			redirect_to users_path
-		else
-			render action: 'index'
-		end
+			if @user.save
+				flash[:notice] = "Created Account"
+				session[:user_id] = @user.id
+				redirect_to users_path
+			else
+				render action: 'index'
+			end
 	end
 
 	def destroy
