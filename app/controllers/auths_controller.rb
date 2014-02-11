@@ -5,25 +5,31 @@ class AuthsController < ApplicationController
 			redirect_to edit_user_path
 		else
 			@user = User.new
-			redirect_to users_path
+			redirect_to root_path
 		end
 	end
 
 
 	def create
 		#pull the user from mongo
-		@user = User.find_by(email: params[:user][:email])
-		#check to see if the password matches
-		if @user.authenticated?(params[:user][:password])
-			#authenticated!!!
-			#lets store the state that the user is logged in
-			flash[:notice] = "Logged in"
-			session[:user_id] = @user.id
-			redirect_to users_path
-		else
-			flash[:notice] = "No Account can be found, try again  #{BCrypt::Engine.hash_secret(params[:user][:password], @user.salt)} = #{@user.hashed_password}"
-			redirect_to users_path
-		end
+
+		#need to check to see if user exists first to prevent error
+		# if !!User.find_by(email: params[:user][:email]) == true
+			@user = User.find_by(email: params[:user][:email])
+			#check to see if the password matches
+			if @user.authenticated?(params[:user][:password])
+				#authenticated!!!
+				#lets store the state that the user is logged in
+				flash[:notice] = "Logged in + #{@user.first_name}"
+				#send to seesions controller
+				redirect_to root_path
+			else
+				flash[:notice] = "Cannot be authenticated + #{BCrypt::Engine.hash_secret(params[:user][:password], @user.salt)} + #{@user.hashed_password}"
+				redirect_to root_path
+			end
+		# else
+		# 	flash[:notice] = "No account"
+		# end
 	end
 
 end

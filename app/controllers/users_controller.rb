@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 	end
 
 	def new
+		flash[:notice] = "in user's new"
 		@user = User.new
 		redirect_to users_path
 	end
@@ -22,9 +23,17 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		if current_user.update(user_params)
-			render action: 'edit'
+		@user = User.find(params[:id])
+		if params[:user][:password] == params[:user][:password_confirmation]
+			if current_user.update(user_params)
+				flash[:notice] = "Successfully updated account!"
+				render action: 'edit'
+			else
+				flash[:notice] = "Passwords Match, but couldn't update"
+				render action: 'edit'
+			end
 		else
+			flash[:notice] = "Passwords Don't Match!"
 			render action: 'edit'
 		end
 	end
@@ -33,8 +42,9 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 			if @user.save
 				flash[:notice] = "Created Account"
-				session[:user_id] = @user.id
-				redirect_to users_path
+				#send to sessions controller
+				#redirect_to signin_path
+				redirect_to root_path
 			else
 				render action: 'index'
 			end
@@ -45,7 +55,7 @@ class UsersController < ApplicationController
 
 		if @user.destroy
 			flash[:notice] = "Account Deleted"
-			session[:user_id] = nil
+			#send to sessions controller
 			redirect_to users_path
 		else
 			render action: 'index'

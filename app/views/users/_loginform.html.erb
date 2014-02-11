@@ -1,10 +1,10 @@
 <div id="login">
   Login
-  <%= form_for @user, {url: '/auths', method:"post"} do |f| %>
+  <%= form_for @user, {url: auths_path } do |f| %>
     <%= f.label :email %>
     <%= f.text_field :email %><br />
     <%= f.label :password %>
-    <%= f.text_field :password %><br />
+    <%= f.password_field :password %><br />
     <%= f.submit "Login" %>
   <% end %>
 </div>
