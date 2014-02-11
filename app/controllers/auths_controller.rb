@@ -12,7 +12,8 @@ class AuthsController < ApplicationController
 
 	def create
 		#pull the user from mongo
-
+		puts "****************************************"
+		puts params.inspect
 		#need to check to see if user exists first to prevent error
 		# if !!User.find_by(email: params[:user][:email]) == true
 			@user = User.find_by(email: params[:user][:email])
@@ -20,11 +21,12 @@ class AuthsController < ApplicationController
 			if @user.authenticated?(params[:user][:password])
 				#authenticated!!!
 				#lets store the state that the user is logged in
-				flash[:notice] = "Logged in + #{@user.first_name}"
+				flash[:notice] = "Logged in"
 				#send to seesions controller
+				session[:user_id] = @user.id
 				redirect_to root_path
 			else
-				flash[:notice] = "Cannot be authenticated + #{BCrypt::Engine.hash_secret(params[:user][:password], @user.salt)} + #{@user.hashed_password}"
+				flash[:notice] = "Cannot be authenticated"
 				redirect_to root_path
 			end
 		# else

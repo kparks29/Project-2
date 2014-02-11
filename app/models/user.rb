@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 class User
   include Mongoid::Document
   include Mongoid::Attributes::Dynamic
@@ -31,18 +33,20 @@ class User
       user.last_name = auth.info.last_name
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-     # #test to see if the email address exists 
-     #  if user.email == auth.info.email
-     #    #if there is an existing email
-     #    #go ahead override the email uniqueness and update the user
-     #    user.update_attributes(validates: false)
-     #  else
-     #    #else there is no email that matches
-     #    #add the fb email to our user model
-     #    user.email = auth.info.email
-     #    #save the new user
+     # #test to see if the email address exists
+      # checkuser = User.find_by(email: user[:email]) 
+      # if checkuser.email == auth.info.email
+      #   #if there is an existing email
+      #   #go ahead override the email uniqueness and update the user
+      #   user.email = auth.info.email
+      #   user.update_attributes(validates: false)
+      # else
+      #   #else there is no email that matches
+      #   #add the fb email to our user model
+      #   user.email = auth.info.email
+        #save the new user
          user.save!
-     #  end
+      # end
 
         # The following transaction covers any possible database side-effects of the
         # attributes assignment. For example, setting the IDs of a child collection.

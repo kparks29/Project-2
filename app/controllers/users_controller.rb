@@ -42,8 +42,7 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 			if @user.save
 				flash[:notice] = "Created Account"
-				#send to sessions controller
-				#redirect_to signin_path
+				session[:user_id] = @user.id
 				redirect_to root_path
 			else
 				render action: 'index'
@@ -65,7 +64,7 @@ class UsersController < ApplicationController
 	private
 
 	def user_params
-		params.require(:user).permit(:first_name,:last_name,:name,:salt,:hashed_password,:email,:city,:state,:zip_code,:image)
+		params.require(:user).permit(:first_name,:last_name,:name,:email,:city,:location,:image,:password)
 	end
 
 

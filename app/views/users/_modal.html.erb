@@ -8,7 +8,9 @@
 
       <div class="modal-body">
         <%= render :partial =>'loginform', :controller => 'auths', :action => 'create' %>
-        <%= render :partial =>'signupform', :controller => 'auths', :action => 'new' %>
+        <%= render :partial =>'signupform', :controller => 'auths', :action => 'new' %><br />
+        <%= session[:user_id]  %><br />
+        <%#= current_user.id  %>
         <div id="get_started">
           <a onclick="login()">Login</a> or 
           <a onclick="signUp()">Sign Up</a>
