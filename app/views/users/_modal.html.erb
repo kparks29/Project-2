@@ -8,14 +8,12 @@
 
       <div class="modal-body">
         <%= render :partial =>'loginform', :controller => 'auths', :action => 'create' %>
-        <%= render :partial =>'signupform', :controller => 'auths', :action => 'new' %><br />
-        <%= session[:user_id]  %><br />
-        <%#= current_user.id  %>
+        <%= render :partial =>'signupform', :controller => 'auths', :action => 'new' %>
         <div id="get_started">
           <a onclick="login()">Login</a> or 
           <a onclick="signUp()">Sign Up</a>
           <br /><br />
-          <%= link_to "Sign in with Facebook", "/auth/facebook" %>
+          <%= link_to "Sign in with Facebook", "/auth/facebook", id: "#sign_in" %>
         </div>
       </div>
       <div class="modal-footer">

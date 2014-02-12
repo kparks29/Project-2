@@ -27,26 +27,22 @@ class User
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name
-      user.email = auth.info.email #will need to commit this line out when doing check for current email
+      user.email = auth.info.email 
       user.image = auth.info.image
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-     # #test to see if the email address exists
-      # checkuser = User.find_by(email: user[:email]) 
-      # if checkuser.email == auth.info.email
-      #   #if there is an existing email
-      #   #go ahead override the email uniqueness and update the user
-      #   user.email = auth.info.email
-      #   user.update_attributes(validates: false)
-      # else
-      #   #else there is no email that matches
-      #   #add the fb email to our user model
-      #   user.email = auth.info.email
-        #save the new user
-         user.save!
-      # end
+
+
+
+      @users = User.find_by(email: auth[:info][:email]) 
+      if @users && @users.email == user.email
+        user.update_attributes(validates: false)
+      else
+        user.save!
+      end
+
 
         # The following transaction covers any possible database side-effects of the
         # attributes assignment. For example, setting the IDs of a child collection.
@@ -63,9 +59,11 @@ class User
   private
 
   def hash_stuff
-    self.salt = BCrypt::Engine.generate_salt
-    self.hashed_password = BCrypt::Engine.hash_secret(@password, self.salt)
-    @password = nil
+    if @password != nil
+      self.salt = BCrypt::Engine.generate_salt
+      self.hashed_password = BCrypt::Engine.hash_secret(@password, self.salt)
+      @password = nil
+    end
   end
 
 end

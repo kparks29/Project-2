@@ -11,8 +11,12 @@ function signUp() {
 
 function refresh() {
 	setTimeout(function() {
-	document.getElementById('get_started').style.display = 'block';
-	document.getElementById('signup').style.display = 'none';
-	document.getElementById('login').style.display = 'none';
-},200);
+		document.getElementById('get_started').style.display = 'block';
+		document.getElementById('signup').style.display = 'none';
+		document.getElementById('login').style.display = 'none';
+	},200);
 }
+
+ if (window.location.hash && window.location.hash == '#_=_') {
+        window.location.hash = '';
+    }

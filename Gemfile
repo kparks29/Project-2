@@ -6,7 +6,7 @@ gem 'mongoid', github: 'mongoid/mongoid'
 gem 'bootstrap-sass', github: 'twbs/bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'omniauth'
-gem "omniauth-facebook"
+gem "omniauth-facebook", '~> 1.4.0'
 gem 'bcrypt-ruby', github: 'codahale/bcrypt-ruby'
 
 

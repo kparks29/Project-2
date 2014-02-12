@@ -39,7 +39,9 @@
   </div><!-- /.container-fluid -->
 </nav>
 <%= flash[:notice] %>
+<div class="container-fluid">
 <%= yield %>
+</div>
 <!-- Modal -->
 <%= render partial: 'modal' %>
 

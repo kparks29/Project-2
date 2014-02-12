@@ -5,6 +5,10 @@ $my_brand_color: #66f;
 @import url("http://fonts.googleapis.com/css?family=Rock+Salt");
 @import url("http://fonts.googleapis.com/css?family=Oleo+Script");
 
+html, body, .row {
+	height: 100%;
+}
+
 body {
 	font-family: 'Rock Salt', cursive;
 }
