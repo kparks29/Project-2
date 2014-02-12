@@ -32,7 +32,7 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li><% if current_user %><li><a><%= image_tag current_user.image, size: '30' %></a></li><li><%= link_to current_user.first_name, edit_user_path(current_user) %></a></li><li><%= link_to "LOGOUT", signout_path, id: "sign_out" %></a><% else %><a data-toggle="modal" data-target="#myModal">LOGIN</a><% end %></li>
+        <li><% if current_user %><li><a><% if !!current_user.image %><%= image_tag current_user.image, size: '30' %><% end %></a></li><li><%= link_to current_user.first_name, edit_user_path(current_user) %></a></li><li><%= link_to "LOGOUT", signout_path, id: "sign_out" %></a><% else %><a data-toggle="modal" data-target="#myModal">LOGIN</a><% end %></li>
         
       </ul>
     </div><!-- /.navbar-collapse -->

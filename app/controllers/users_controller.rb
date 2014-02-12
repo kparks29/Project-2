@@ -54,7 +54,7 @@ class UsersController < ApplicationController
 
 		if @user.destroy
 			flash[:notice] = "Account Deleted"
-			#send to sessions controller
+			session[:user_id] = nil
 			redirect_to users_path
 		else
 			render action: 'index'

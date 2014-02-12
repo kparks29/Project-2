@@ -35,10 +35,13 @@ class User
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 
 
+      puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+      puts user.new_record?
 
-      @users = User.find_by(email: auth[:info][:email]) 
-      if @users && @users.email == user.email
-        user.update_attributes(validates: false)
+      @checkuser = User.find_by(email: auth[:info][:email])
+      if @checkuser && @checkuser.email == auth.info.email
+        user.id = @checkuser.id
+        @checkuser.update!(name: user.name, first_name: user.first_name, last_name: user.last_name, uid: user.uid, provider: user.provider, image: user.image, oauth_token: user.oauth_token, oauth_expires_at: user.oauth_expires_at)
       else
         user.save!
       end

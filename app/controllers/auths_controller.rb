@@ -18,10 +18,11 @@ class AuthsController < ApplicationController
 					flash[:notice] = "Logged in"
 					#store the session
 					session[:user_id] = @user.id
+					redirect_to root_path
 				else
 					flash[:notice] = "Incorrect Login Info"
+					redirect_to root_path
 				end
-				redirect_to root_path
 	end
 
 end
