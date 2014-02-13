@@ -1,11 +1,31 @@
-<%= form_for current_user do |f| %>
-  First Name: <%= f.text_field :first_name %><br />
-  Last Name: <%= f.text_field :last_name %><br />
-  Email: <%= f.text_field :email %><br />
-  City, State: <%= f.text_field :location %><br />
-  Date of Birth: <%= f.date_field :date_of_birth %><br />
-  Password <%= f.password_field :password %><br />
-  Confirm Passowrd <%= f.password_field :password_confirmation %><br />
-  <%= f.submit %>  <button class="form_button"><%= link_to "Delete Account", user_path(current_user), method: "delete" %></button>
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
-<% end %>
+	<%= form_for current_user do |f| %>
+		<strong><h3>Welcome <%= current_user.first_name %> <%= current_user.last_name %></h3></strong><br />
+		<% if !!current_user.image %>
+			<%= image_tag current_user.image, size: "150" %>
+		<% end %><br />
+		<strong><h3>Update Profile</h3></strong><br />
+		Upload Image: <%= f.file_field :upload_image %><br />
+	  First Name: <%= f.text_field :first_name %><br />
+	  Last Name: <%= f.text_field :last_name %><br />
+	  Email: <%= f.text_field :email %><br />
+	  City, State: <%= f.text_field :location %><br />
+	  Date of Birth: <%= f.date_field :date_of_birth %><br />
+	  <%= f.submit "Update Profile" %>  <button class="form_button"><%= link_to "Delete Account", user_path(current_user), method: "delete" %></button>
+	<% end %>
+
+
+	<%= form_for current_user do |f| %>	
+		<strong><h3>Change Password</h3></strong><br />
+	  Password: <%= f.password_field :password %><br />
+	  Confirm Passowrd: <%= f.password_field :password_confirmation %><br />
+	  <%= f.submit "Change Password", action: "change_password" %>
+	<% end %>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+
+
+</div>

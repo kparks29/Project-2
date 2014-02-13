@@ -13,6 +13,18 @@ Bundler.require(:default, Rails.env)
 
 module HashOutBout
   class Application < Rails::Application
+
+    config.paperclip_defaults = {
+      :storage => :fog,
+      :fog_credentials => {
+        :aws_access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+        :aws_secret_access_key=> ENV['AWS_SECRET_ACCESS_KEY'],
+        :provider=> 'AWS'},
+      :fog_public => true,
+      :url => ":id/:filename",
+      :fog_directory => ENV['AWS_BUCKET'] 
+      
+    }
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

@@ -8,6 +8,10 @@ gem 'font-awesome-sass'
 gem 'omniauth'
 gem "omniauth-facebook", '~> 1.4.0'
 gem 'bcrypt-ruby', github: 'codahale/bcrypt-ruby'
+gem 'fog'
+gem 'figaro'
+gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
+gem 'aws-sdk'
 
 
 # Use SCSS for stylesheets

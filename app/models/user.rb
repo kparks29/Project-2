@@ -2,6 +2,7 @@ require 'bcrypt'
 
 class User
   include Mongoid::Document
+  include Mongoid::Paperclip
   include Mongoid::Attributes::Dynamic
 
   attr_accessor :password, :password_confirmation
@@ -22,6 +23,24 @@ class User
 
   validates :email, uniqueness: true
 
+  def self.after_commit(*args, &block)
+    args.each do |arg|
+      case arg[:on]
+      when :destroy
+        after_destroy &block
+      end
+    end
+  end
+
+  has_mongoid_attached_file :upload_image,
+    :styles => {
+    :tiny => "20x20",       # small clip 
+    :thumb => "100x100#",   # Centrally cropped
+    :small  => "150x150>"}  # Only squish if it's larger than this
+  validates_attachment_content_type :upload_image,
+    :content_type => /\Aimage\/.*\Z/
+
+
    def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth.provider
@@ -35,13 +54,16 @@ class User
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 
 
-      puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-      puts user.new_record?
+      
 
-      @checkuser = User.find_by(email: auth[:info][:email])
-      if @checkuser && @checkuser.email == auth.info.email
-        user.id = @checkuser.id
-        @checkuser.update!(name: user.name, first_name: user.first_name, last_name: user.last_name, uid: user.uid, provider: user.provider, image: user.image, oauth_token: user.oauth_token, oauth_expires_at: user.oauth_expires_at)
+
+      @checkuser = User.where(email: auth[:info][:email])
+      if @checkuser.length > 0 && @checkuser[0].email == auth.info.email
+        user.id = @checkuser[0].id
+        if @checkuser[0].image
+          user.image = @checkuser[0].image
+        end
+        @checkuser[0].update!(name: user.name, first_name: user.first_name, last_name: user.last_name, uid: user.uid, provider: user.provider, image: user.image, oauth_token: user.oauth_token, oauth_expires_at: user.oauth_expires_at)
       else
         user.save!
       end

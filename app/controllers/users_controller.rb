@@ -24,7 +24,34 @@ class UsersController < ApplicationController
 
 	def update
 		@user = User.find(params[:id])
-		if params[:user][:password] == params[:user][:password_confirmation]
+		if current_user.upload_image.url
+			puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+			puts current_user.image
+			puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+			puts params[:user][:image]
+			
+
+			params[:user][:image] = current_user.upload_image.url
+			
+
+			puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+			puts params[:user][:image]
+
+		end
+		if current_user.update(user_params)
+			flash[:notice] = "Successfully updated account!"
+			render action: 'edit'
+		else
+			flash[:notice] = "Couldn't update"
+			render action: 'edit'
+		end
+		puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+		puts current_user.image
+		
+	end
+
+	def change_password
+		if params[:user][:password] == params[:user][:password_confirmation] && params[:user][:password] != ""
 			if current_user.update(user_params)
 				flash[:notice] = "Successfully updated account!"
 				render action: 'edit'
@@ -64,7 +91,7 @@ class UsersController < ApplicationController
 	private
 
 	def user_params
-		params.require(:user).permit(:first_name,:last_name,:name,:email,:city,:location,:image,:password)
+		params.require(:user).permit(:first_name,:last_name,:name,:email,:city,:location,:image,:password,:upload_image)
 	end
 
 

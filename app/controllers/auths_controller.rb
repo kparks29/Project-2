@@ -12,12 +12,12 @@ class AuthsController < ApplicationController
 
 	def create
 		#pull the user from mongo
-			@user = User.find_by(email: params[:user][:email]) 
+			@user = User.where(email: params[:user][:email]) 
 				#check to see if the user exists and the password matches
-				if @user && @user.authenticated?(params[:user][:password])
+				if @user.length > 0 && @user[0].authenticated?(params[:user][:password])
 					flash[:notice] = "Logged in"
 					#store the session
-					session[:user_id] = @user.id
+					session[:user_id] = @user[0].id
 					redirect_to root_path
 				else
 					flash[:notice] = "Incorrect Login Info"
