@@ -5,7 +5,7 @@ class User
   include Mongoid::Paperclip
   include Mongoid::Attributes::Dynamic
 
-  attr_accessor :password, :password_confirmation
+  attr_accessor :password, :password_confirmation, :upload_image
 
   field :first_name, type: String
   field :last_name, type: String

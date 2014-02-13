@@ -11,7 +11,7 @@ gem 'bcrypt-ruby', github: 'codahale/bcrypt-ruby'
 gem 'fog'
 gem 'figaro'
 gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
-gem 'aws-sdk'
+gem 'pry'
 
 
 # Use SCSS for stylesheets

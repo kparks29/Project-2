@@ -17,13 +17,13 @@ module HashOutBout
     config.paperclip_defaults = {
       :storage => :fog,
       :fog_credentials => {
-        :aws_access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-        :aws_secret_access_key=> ENV['AWS_SECRET_ACCESS_KEY'],
-        :provider=> 'AWS'},
+        :provider => "Google",
+        :google_storage_access_key_id => ENV['GSTORAGE_ACCESS_KEY_ID'],
+        :google_storage_secret_access_key => ENV['GSTORAGE_SECRET_ACCESS_KEY']
+      },
       :fog_public => true,
-      :url => ":id/:filename",
-      :fog_directory => ENV['AWS_BUCKET'] 
-      
+      :fog_host => ENV['GSTORAGE_HOST'],
+      :fog_directory => ENV['GSTORAGE_BUCKET']
     }
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

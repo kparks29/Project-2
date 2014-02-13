@@ -24,29 +24,24 @@ class UsersController < ApplicationController
 
 	def update
 		@user = User.find(params[:id])
+
 		if current_user.upload_image.url
-			puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-			puts current_user.image
-			puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-			puts params[:user][:image]
-			
 
-			params[:user][:image] = current_user.upload_image.url
-			
-
-			puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-			puts params[:user][:image]
+			params[:user][:image] = params
 
 		end
-		if current_user.update(user_params)
+		if @user.update(user_params)
+			params[:user][:image] = @user.upload_image.url
+			@user.update_attributes(image: params[:user][:image])
+			current_user.image = @user.image
 			flash[:notice] = "Successfully updated account!"
 			render action: 'edit'
 		else
 			flash[:notice] = "Couldn't update"
 			render action: 'edit'
 		end
-		puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-		puts current_user.image
+
+
 		
 	end
 
