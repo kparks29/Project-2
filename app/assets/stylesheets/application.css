@@ -13,17 +13,16 @@
  */
 
 .footer {
-  bottom:0;
+  bottom: 0;
 	height: 80px;
 	color: #fff;
 	width: 100%;
 	box-shadow: 1px 8px 30px #000;
 	text-align: center;
+	line-height: 80px;
+	padding: 0;
 }
 
-.footer h2 {
-	padding-top: 7px;
-}
 
 .clear {
 	clear: both;

@@ -23,9 +23,27 @@ input {
 	padding-bottom: 70px;
 }
 
-.create_bout {
+.create_bout, .create_bout_button {
 	text-align: center;
 	vertical-align: middle;
+}
+
+.create_bout {
+	padding-top: 25%;
+	height: 400px;
+	width: 100%;
+	background-image: url("lightning_bolt.jpg");
+	background-size: 75% 100%;
+	background-repeat:no-repeat;
+	background-position: center;
+
+}
+
+.create_bout_button {
+	line-height: 70px;
+	height: 80px;
+	width: 500px;
+	font-size: 40px;
 }
 
 #login, #signup {

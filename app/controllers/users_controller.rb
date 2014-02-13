@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 	def new
 		flash[:notice] = "in user's new"
 		@user = User.new
-		redirect_to users_path
+		redirect_to root_path
 	end
 
 	def show
@@ -86,7 +86,11 @@ class UsersController < ApplicationController
 	private
 
 	def user_params
-		params.require(:user).permit(:first_name,:last_name,:name,:email,:city,:location,:image,:password,:upload_image)
+		if params[:admin]
+			params.require(:admin).permit(:first_name,:last_name,:name,:email,:city,:location,:image,:password,:upload_image)
+		else
+			params.require(:user).permit(:first_name,:last_name,:name,:email,:city,:location,:image,:password,:upload_image)
+		end
 	end
 
 

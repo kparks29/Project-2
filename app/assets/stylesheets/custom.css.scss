@@ -1,5 +1,5 @@
 $my_navbar_color: #fff;
-$my_brand_color: #66f;
+$my_brand_color: #f66;
 
 @import "bootstrap";
 @import url("http://fonts.googleapis.com/css?family=Rock+Salt");
@@ -54,16 +54,18 @@ nav, .modal, .first-stripe {
 	margin: 20px;
 }
 
+.vs, .upcoming-vs, .footer {
+	vertical-align: middle;
+}
+
 .vs {
 	font-size: 100px;
-	vertical-align: center;
 	line-height: 250px;
 	top: 25px;
 }
 
 .upcoming-vs {
 	font-size: 50px;
-	vertical-align: center;
 	line-height: 90px;
 }
 
@@ -81,3 +83,4 @@ nav, .modal, .first-stripe {
 .carousel-indicators {
 	color: #000;
 }
+
