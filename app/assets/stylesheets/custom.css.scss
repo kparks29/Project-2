@@ -78,6 +78,7 @@ nav, .modal, .first-stripe {
 .first-stripe {
 	background-color: darken($my_navbar_color, 10);
 	padding-bottom: 20px;
+	min-height: 400px;
 }
 
 .carousel-indicators {

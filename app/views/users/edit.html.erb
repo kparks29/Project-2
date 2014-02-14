@@ -1,20 +1,11 @@
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
-	<%= form_for current_user do |f| %>
+	
 		<strong><h3>Welcome <%= current_user.first_name %> <%= current_user.last_name %></h3></strong><br />
 		<% if !!@user.image %>
 			<%= image_tag @user.image, size: "150" %>
-		<% end %><br />
-		<strong><h3>Update Profile</h3></strong><br />
-		Upload Image: <%= f.file_field :upload_image %><br />
-	  First Name: <%= f.text_field :first_name %><br />
-	  Last Name: <%= f.text_field :last_name %><br />
-	  Email: <%= f.text_field :email %><br />
-	  City, State: <%= f.text_field :location %><br />
-	  Date of Birth: <%= f.date_field :date_of_birth %><br />
-	  <%= f.submit "Update Profile" %>  <button class="form_button"><%= link_to "Delete Account", user_path(current_user), method: "delete" %></button>
-	<% end %>
-
+		<% end %><br /><br /><br />
+		
 
 	<%= form_for current_user do |f| %>	
 		<strong><h3>Change Password</h3></strong><br />
@@ -22,10 +13,26 @@
 	  Confirm Passowrd: <%= f.password_field :password_confirmation %><br />
 	  <%= f.submit "Change Password", action: "change_password" %>
 	<% end %>
+
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
-
+	<strong><h3>Update Profile</h3></strong><br />
+	<%= form_for current_user do |f| %>
+		Upload Image: <%= f.file_field :upload_image %><br />
+	  First Name: <%= f.text_field :first_name %><br />
+	  Last Name: <%= f.text_field :last_name %><br />
+	  Email: <%= f.text_field :email %><br />
+	  City, State: <%= f.text_field :location %><br />
+		<p><% if current_user.role == "admin" %>
+		  <%= f.label :role %><br />
+		  <%= f.collection_select :role, User::ROLES, :to_s, :titleize, prompt: true %>
+			<% end %>
+		</p>
+		<p>
+	  <%= f.submit "Update Profile", class: "btn-success btn" %>  <%= link_to "Delete Account", user_path(current_user), method: "delete", class: "btn-danger btn" %>
+		</p>
+	<% end %>
 
 </div>

@@ -12,6 +12,7 @@ gem 'fog'
 gem 'figaro'
 gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
 gem 'pry'
+gem 'cancan'
 
 
 # Use SCSS for stylesheets

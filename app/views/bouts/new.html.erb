@@ -1,0 +1,11 @@
+<div id="bout_request_form">
+  Sign up
+  <%= form_for @user do |f| %>
+    Name of Bout: <%= f.text_field :name %><br />
+    Date: <%= f.text_field :date %><br />
+    Speaker 1: <%= f.text_field :speaker1 %><br />
+    Speaker 2: <%= f.password_field :speaker2 %><br />
+    Moderator: <%= f.password_field :moderator %><br />
+    <%= f.submit, class: "btn btn-success" %>
+  <% end %>
+</div>

@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    Bout Requests
+    <% @bout_requests.each do |bout| %>
+        <div class="bout_request col-xs-12 col-sm-6 col-md-4 col-lg-4">
+          Bout Name: <%= bout.name %>
+          Date: <%= bout.date %>
+          Time: <%= bout.date %>
+          Speakers: <%= bout.speaker1 %> and <%= bout.speaker2 %>
+          Moderator: <%= bout.moderator %>
+          Status:<%= bout.accepted? ? "Accepted" : "Waiting for Approval" %>
+        </div>
+    <% end %>
+  </div>
+</div>

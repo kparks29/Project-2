@@ -5,6 +5,8 @@ class User
   include Mongoid::Paperclip
   include Mongoid::Attributes::Dynamic
 
+  has_many :bouts
+
   attr_accessor :password, :password_confirmation, :upload_image
 
   field :first_name, type: String
@@ -20,6 +22,14 @@ class User
   field :oauth_token, type: String
   field :oauth_expires_at, type: DateTime
   field :image, type: String
+  field :role, type: String
+
+  ROLES = %w[admin moderator user]
+
+  def role_symbols
+    [role.to_sym]
+  end
+  
 
   validates :email, uniqueness: true
 

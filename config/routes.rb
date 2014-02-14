@@ -3,6 +3,7 @@ HashOutBout::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
   resources :users
   resources :auths, only:[:create,:new,:index]
+  resources :bout_requests
   # You can have the root of your site routed with "root"
   root 'users#index'
   
