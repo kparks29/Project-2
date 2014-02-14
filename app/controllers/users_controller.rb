@@ -1,6 +1,6 @@
 require 'rails/mongoid'
 require 'bcrypt'
-
+#main user controller
 class UsersController < ApplicationController
 
 
